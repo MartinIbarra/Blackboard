@@ -3,7 +3,7 @@
 @import './variables';
 
 body{
-    background-color:#0b0b15;
+    background-color:#e07a5f;
     color:$color_font;
 }
 
@@ -22,31 +22,33 @@ body{
 
 .home-container{
     display: flex;
-    background: #0b0b15;
+    background: #f4f1de;
 }
 
-.name_input_holder{
-    margin: auto auto;
-    display: none;
-    &.nick-active{
-        display: inline-grid;
-    }
-    #name_input{
-        height: 76px;
-        color: #fff;
-        text-align: center;
-        font-size: 36px;
-        width: 460px;
-        border: none;
-        background: transparent;
-        border-bottom: 1px solid #000;
-        &:focus{
-            outline: none;
-        }
-    }
-    .create-btn{
-        font-size: 26px;
-    }
+// .name_input_holder{
+//     margin: auto auto;
+//     display: none;
+//     &.nick-active{
+//         display: inline-grid;
+//     }
+//     #name_input{
+//         height: 76px;
+//         color: #fff;
+//         text-align: center;
+//         font-size: 36px;
+//         width: 460px;
+//         border: none;
+//         background: transparent;
+//         border-bottom: 1px solid #000;
+//         &:focus{
+//             outline: none;
+//         }
+//     }
+// }
+
+.create-btn{
+    font-size: 26px;
+    background-color: #3d405b;
 }
 
 .form-container{
@@ -59,7 +61,7 @@ body{
     margin: auto auto;
     .room-input{
         height: 76px;
-        color: #fff;
+        color: #3d405b;
         text-align: center;
         font-size: 36px;
         width: 460px;

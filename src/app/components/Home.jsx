@@ -24,19 +24,17 @@ const Home = () => {
 
     return (
         <div className="jumbotron home-container">
+            <div className="room_input_holder" ref={roomHolderRef}>
+                <form className="form-container" onSubmit={createRoom}>
+                    <input className="room-input" required type="text" placeholder="Create Room" ref={createRoomInput} />
+                    <button className="create-btn btn btn-secondary"  type="submit">Create a room</button>
+                </form>
 
-                <div className="room_input_holder" ref={roomHolderRef}>
-                    <form className="form-container" onSubmit={createRoom}>
-                        <input className="room-input" required type="text" placeholder="Create Room" ref={createRoomInput} />
-                        <button className="create-btn btn btn-primary"  type="submit">Create a room</button>
-                    </form>
-
-                    <form className="form-container" onSubmit={joinRoom}>
-                        <input className="room-input" required type="text" placeholder="Join Room" ref={joinRoomInput} />
-                        <button className="create-btn btn btn-primary" type="submit">Join room</button>
-                    </form>
-                </div>
-
+                <form className="form-container" onSubmit={joinRoom}>
+                    <input className="room-input" required type="text" placeholder="Join Room" ref={joinRoomInput} />
+                    <button className="create-btn btn btn-secondary" type="submit">Join room</button>
+                </form>
+            </div>
         </div>
     )
 }
