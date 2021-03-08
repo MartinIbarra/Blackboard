@@ -25,6 +25,8 @@ io.on('connection', socket =>{
     })
 
     socket.on('drawing', data => socket.to(data.roomName).emit('drawing', data))
+
+    socket.on('change-color', data => socket.to(data.roomName).emit('change-color', data))
 })
 
 

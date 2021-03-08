@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { io } from 'socket.io-client'
 import PaletaColores from './PaletaColores'
-let color = '#000000'
+let color
 
 const Canvas = () => {
 
@@ -12,17 +12,14 @@ const Canvas = () => {
 
     
     const getColor = (param) => {
-        console.log('color:', param)
         color = param
     }
+    const socket = io()
 
     useEffect(() => {
-        const socket = io()
         const canv = canvasRef.current
         const ctx = canv.getContext('2d')
         const roomName = window.location.href.split('/')[4]
-
-        // let color = getColor()
 
         let dibujando = false
 
@@ -36,7 +33,7 @@ const Canvas = () => {
         }
         ctx.lineWidth = 1
 
-        function obtenerPosicion(e){ 
+        function obtenerPosicion(e){
             let rect = canv.getBoundingClientRect()
             coordenadas.x = (e.clientX - rect.left)
             coordenadas.y = (e.clientY - rect.top)
@@ -61,7 +58,7 @@ const Canvas = () => {
 
             ctx.beginPath()
             ctx.lineCap = 'round'
-            ctx.strokeStyle = color
+            ctx.strokeStyle = !color ? '#000000' : color
             ctx.moveTo(coordenadas.x, coordenadas.y)
 
             oldCoord.x = coordenadas.x
@@ -69,7 +66,7 @@ const Canvas = () => {
             
             obtenerPosicion(event)
 
-            socket.emit('drawing', {oldCoord, coordenadas, roomName})
+            socket.emit('drawing', {oldCoord, coordenadas, roomName, color})
             
             ctx.lineTo(coordenadas.x , coordenadas.y)
             ctx.stroke()
@@ -80,7 +77,7 @@ const Canvas = () => {
             console.log('socket:', color)
             ctx.beginPath()
             ctx.lineCap = 'round'
-            ctx.strokeStyle = color
+            ctx.strokeStyle = !data.color ? '#000000' : data.color
             ctx.moveTo(data.oldCoord.x, data.oldCoord.y)
             ctx.lineTo(data.coordenadas.x, data.coordenadas.y)
             ctx.stroke()
@@ -92,6 +89,8 @@ const Canvas = () => {
             dibujandoSocket(data)
         })
 
+        socket.on('change-color', data => color = data)
+
     }, [])
     
     return (
@@ -101,7 +100,7 @@ const Canvas = () => {
                 <div onClick={() => setCanvasState({canv:'active', board:'no-active'})} className={`${state.board} board`}>
         
                 </div>
-                <PaletaColores ref={paletaColores} active={state.canv} getColor={getColor}/>
+                <PaletaColores ref={paletaColores} active={state.canv} getColor={getColor} user={socket}/>
                 <canvas id="canvas-1" className={state.canv} width='800' height='600' ref={canvasRef}>
                     Tu navegador no es compatible
                 </canvas>
