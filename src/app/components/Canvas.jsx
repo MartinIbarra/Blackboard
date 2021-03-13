@@ -8,20 +8,25 @@ const Canvas = () => {
     const [state, setCanvasState] = useState({canv: "no-active", board: "active"})
 
     const canvasRef = useRef(null)
-    const paletaColores = useRef(null)
+    const paletaColoresRef = useRef(null)
+    const borradorRef = useRef(null)
+    const penRef = useRef(null)
+    const socket = io()
 
-    
     const getColor = (param) => {
         color = param
     }
-    const socket = io()
 
     useEffect(() => {
         const canv = canvasRef.current
         const ctx = canv.getContext('2d')
         const roomName = window.location.href.split('/')[4]
 
+        let pen = true
+        let borrador = false
+
         let dibujando = false
+        let borrando = false
 
         let coordenadas = {
             x: 0,
@@ -40,22 +45,39 @@ const Canvas = () => {
             return coordenadas
         }
 
+        borradorRef.current.addEventListener('click', () => {
+            pen = false
+            borrador = true
+        }, false)
+
+        penRef.current.addEventListener('click', () => {
+            pen = true
+            borrador = false
+        }, false)
+
         canv.addEventListener('mousedown', event => {
-            dibujando = true
+            if(pen){
+                dibujando = true
+            } else if(borrador){
+                borrando = true
+            }
             obtenerPosicion(event)
         })
 
         canv.addEventListener('mouseup', () => {
             dibujando = false
+            borrando = false
         })
 
-        canv.addEventListener('mousemove', dibujar, false)
+        canv.addEventListener('mousemove', (e) => {
+            if(pen && dibujando){
+                dibujar(e)
+            } else if(borrador && borrando){
+                borrar(e)
+            }
+        }, false)
 
         function dibujar(event){
-            if (!dibujando) return
-
-            console.log('dibujando:', color)
-
             ctx.beginPath()
             ctx.lineCap = 'round'
             ctx.strokeStyle = !color ? '#000000' : color
@@ -70,11 +92,20 @@ const Canvas = () => {
             
             ctx.lineTo(coordenadas.x , coordenadas.y)
             ctx.stroke()
+        }
 
+        function borrar(e){
+            let pos = obtenerPosicion(e)
+            ctx.clearRect(pos.x - 50, pos.y - 50, 100, 100)
+            socket.emit('borrando', {pos})
+        }
+
+        function borrandoSocket(data){
+            console.log('asdasdasdasda')
+            ctx.clearRect(data.pos.x - 50, data.pos.y - 50, 100, 100)
         }
 
         function dibujandoSocket(data){
-            console.log('socket:', color)
             ctx.beginPath()
             ctx.lineCap = 'round'
             ctx.strokeStyle = !data.color ? '#000000' : data.color
@@ -89,6 +120,11 @@ const Canvas = () => {
             dibujandoSocket(data)
         })
 
+        socket.on('borrando', data => {
+            console.log('borrando socket')
+            borrandoSocket(data)
+        })
+
         socket.on('change-color', data => color = data)
 
     }, [])
@@ -100,7 +136,9 @@ const Canvas = () => {
                 <div onClick={() => setCanvasState({canv:'active', board:'no-active'})} className={`${state.board} board`}>
         
                 </div>
-                <PaletaColores ref={paletaColores} active={state.canv} getColor={getColor} user={socket}/>
+                <PaletaColores ref={paletaColoresRef} active={state.canv} getColor={getColor} user={socket}/>
+                <span id="borrador" ref={borradorRef}></span>
+                <span id="pen" ref={penRef}></span>
                 <canvas id="canvas-1" className={state.canv} width='800' height='600' ref={canvasRef}>
                     Tu navegador no es compatible
                 </canvas>

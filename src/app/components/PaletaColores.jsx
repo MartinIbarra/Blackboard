@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 const PaletaColores = (props) => {
-
-    // let [color, setColor] = useState("#000000")
-
-    // let { getColor } = props.getColor
 
     const changeColorEvent = (color) => {
         console.log('change color')
         props.user.emit('change-color', color)
     }
-    useEffect(() => {
-
-    }, [])
-
 
     return (
         <div className={`${props.active} paleta-colores`}>
