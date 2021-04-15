@@ -1,0 +1,185 @@
+@import 'partials/variables';
+
+/* .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+} */
+
+nav {
+	background-color: $nav-background;
+}
+
+body {
+	background-color: $primary;
+	overflow-x: hidden;
+}
+
+.content-rooms{
+	margin-top:auto;
+	margin-bottom:auto;
+}
+
+.error-room{
+	color:red;
+	display:block;
+	height:auto;
+	width:auto;
+
+}
+
+.jumbotron {
+	margin-top: 32px;
+	// height: 50vh;
+	// display: flex;
+	padding-top: 26px;
+	padding-bottom: 26px;
+	background: $secondary;
+}
+
+.saludo-usuario {
+	font-size: 32px;
+	font-weight: 600;
+}
+
+.form-room{
+	input{
+		display: block;
+		position: relative;
+		text-align: center;
+		z-index: 2;
+		font-size:24px;
+		width: 100%;
+		background-color: transparent;
+		border: 1px transparent solid;
+		padding: 4px 16px;
+		color: #000;
+		padding: 16px 8px 4px 4px;
+		margin-bottom: 6px;
+
+		&:focus{
+			outline: unset;
+		}
+	}
+}
+
+.open {
+	min-width: 100%;
+}
+
+.board:hover {
+	cursor: pointer;
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.paleta-colores {
+	background-color: grey;
+	width: 350px;
+	height: 100px;
+	padding: 24px;
+}
+
+span {
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	&:hover{
+      	cursor: pointer;
+  	}
+	
+	&:hover {
+		cursor: pointer;
+	}
+
+  	&#red {
+		background-color: red;
+	}
+
+	&#blue {
+		background-color: blue;
+	}
+
+	&#yellow {
+		background-color: yellow;
+	}
+
+	&#green {
+		background-color: green;
+	}
+
+	&#black {
+		background-color: black;
+	}
+}
+
+#borrador {
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	&:hover{
+      	cursor: pointer;
+  	}
+	background-color: yellow;
+}
+
+#pen {
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	&:hover{
+      	cursor: pointer;
+  	}
+	background-color: grey;
+}
+
+.create-btn {
+	font-size: 26px;
+	background-color: #3d405b;
+}
+
+.form-container {
+	text-align: center;
+	width: 100%;
+	// display: inline-block;
+}
+#canvas {
+	background-color: white;
+	/* height: 100%;
+  width: 100%; */
+}
+
+/* .App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
