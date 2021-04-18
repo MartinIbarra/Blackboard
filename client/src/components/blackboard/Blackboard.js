@@ -10,19 +10,24 @@ const Blackboard = () => {
     const ENDPOINT = 'localhost:5000'
     const borradorRef = useRef(null)
     const penRef = useRef(null)
-    const [ color, setColor ] = useState('#000000')
+    // const [ color, setColor ] = useState('#000000')
+    let color = '#000000'
     const canvasRef = useRef(null)
     const { user, setUser } = useContext(UserContext)
     let { room_id, room_name } = useParams()
     socket = io(ENDPOINT)
 
     const getColor = (param) => {
-        setColor(param)
+        // setColor(param)
+        color = param
+        console.log('color value ', color)
     }
 
     useEffect(() =>{
         const canv = canvasRef.current
         const ctx = canv.getContext('2d')
+        canv.width = window.innerWidth
+        canv.height = window.innerHeight
         let dibujando = false
         let borrando = false
         let pen = true
@@ -123,21 +128,26 @@ const Blackboard = () => {
             borrandoSocket(data)
         })
 
-        socket.on('change-color', data => setColor(data))
+        socket.on('change-color', data => {
+            color = data
+            console.log('change color event listener',color)
+        })
     }, [])
     return (
         <div className="container-fluid">
             <div className="row jumbotron">
-                <div>
-                    <ColorPalette getColor={getColor} user={socket}/>
+                <ColorPalette className="col-6" getColor={getColor} user={socket}/>
+                <div className="col-6">
                     <span id="borrador" ref={borradorRef}>
+                        <i className="bi bi-eraser"></i>
                     </span>
                     <span id="pen" ref={penRef}>
+                        <i className="bi bi-pencil"></i>
                     </span>
-                    <canvas id="canvas" width="800" height="600" ref={canvasRef}>
-                        Tu navegador no es compatible
-                    </canvas>
                 </div>
+                <canvas className="col-12" id="canvas" ref={canvasRef}>
+                    Tu navegador no es compatible
+                </canvas>
             </div>
         </div>
     )

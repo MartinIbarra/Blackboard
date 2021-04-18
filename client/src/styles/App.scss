@@ -1,4 +1,5 @@
 @import 'partials/variables';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
 
 /* .App {
   text-align: center;
@@ -112,6 +113,22 @@ span {
 		cursor: pointer;
 	}
 
+	&#borrador {
+		border-radius: 50%;
+		display:inline-flex;
+		justify-content:center;
+		align-items:center;
+		background-color: transparent;
+	}
+	
+	&#pen {
+		border-radius: 50%;
+		display:inline-flex;
+		justify-content:center;
+		align-items:center;
+		background-color: transparent;
+	}
+
   	&#red {
 		background-color: red;
 	}
@@ -131,28 +148,6 @@ span {
 	&#black {
 		background-color: black;
 	}
-}
-
-#borrador {
-	border-radius: 50%;
-	width: 50px;
-	height: 50px;
-	display: inline-block;
-	&:hover{
-      	cursor: pointer;
-  	}
-	background-color: yellow;
-}
-
-#pen {
-	border-radius: 50%;
-	width: 50px;
-	height: 50px;
-	display: inline-block;
-	&:hover{
-      	cursor: pointer;
-  	}
-	background-color: grey;
 }
 
 .create-btn {
