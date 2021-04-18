@@ -81,7 +81,10 @@ io.on('connection', socket =>{
         io.to(data.room_id).emit('dibujando-socket', data)
     })
 
-    socket.on('change-color', data => io.to(data.room_id).emit('change-color', data))
+    socket.on('change-color', data => {
+        io.to(data.room_id).emit('change-color', data)
+        console.log('change color to', data)
+    })
 
     socket.on('borrando', data => {
         io.to(data.room_id).emit('borrando', data)
