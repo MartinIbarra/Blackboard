@@ -3,10 +3,12 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 const authRoutes = require('./routes/routes')
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 const mongoose = require('mongoose')
-const mongoDB = "mongodb+srv://Sirca:g4hjz2p8@udemynode.jhcj7.mongodb.net/chat-database?retryWrites=true&w=majority"
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+mongoose.connect(process.env.CONNECT_DB_URL, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
     console.log('connected')
 }). catch(err=>{
     console.log(err)
@@ -30,6 +32,10 @@ app.set('port', process.env.PORT || 5000)
 const Room = require('./models/Room')
 const { addUser, getUser, removeUser } = require('./helpers/userHelper')
 const { createRoom } = require('./helpers/roomHelper')
+
+app.get('/', (req, res) =>{
+    res.send('Blackboard app')
+})
 
 app.get('/set-cookie', (req, res) => {
     res.cookie('isAuthenticated', true, {httpOnly:true, maxAge: 24*60*60*1000})
