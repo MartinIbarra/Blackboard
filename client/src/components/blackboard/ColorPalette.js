@@ -1,37 +1,37 @@
 import React from 'react'
 
-const ColorPalette = (props) => {
+const ColorPalette = ({getColor, user}) => {
 
     const changeColorEvent = (color) => {
-        console.log('change color', color)
-        props.getColor(color)
-        props.user.emit('change-color', color)
+        // console.log('change color', color)
+        getColor(color)
+        user.emit('change-color', color)
     }
 
     return (
-        <div className={'paleta-colores'}>
+        <div className='paleta-colores'>
             <span id="red" onClick={() => {
-                    props.getColor("#FF0000")
+                    getColor("#FF0000")
                     changeColorEvent("#FF0000")
                 } 
             }></span>
             <span id="blue" onClick={() => {
-                    props.getColor("#0000FF")
+                    getColor("#0000FF")
                     changeColorEvent("#0000FF")
                 }
             }></span>
             <span id="yellow" onClick={() => {
-                    props.getColor("#FFFF00")   
+                    getColor("#FFFF00")   
                     changeColorEvent("#FFFF00")
                 } 
             }></span>
             <span id="green" onClick={() => {
-                    props.getColor("#00FF00")
+                    getColor("#00FF00")
                     changeColorEvent("#00FF00")
                 } 
             }></span>
             <span id="black" onClick={() => {
-                    props.getColor("#000000")
+                    getColor("#000000")
                     changeColorEvent("#000000")
                 }
             }></span>

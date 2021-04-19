@@ -85,6 +85,7 @@ const Blackboard = () => {
         }, false)
 
         function dibujar(event){
+            console.log('color antes de pintar ',color)
             ctx.beginPath()
             ctx.lineCap = 'round'
             ctx.strokeStyle = !color ? '#000000' : color
@@ -136,7 +137,7 @@ const Blackboard = () => {
     return (
         <div className="container-fluid">
             <div className="row jumbotron">
-                <ColorPalette className="col-6" getColor={getColor} user={socket}/>
+                <ColorPalette getColor={getColor} user={socket}/>
                 <div className="col-6">
                     <span id="borrador" ref={borradorRef}>
                         <i className="bi bi-eraser"></i>
