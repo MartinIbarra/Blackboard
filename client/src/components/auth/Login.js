@@ -17,7 +17,7 @@ const Login = () => {
         setPasswordError('')
 
         try{
-            const res = await fetch('https://blackboard-application.herokuapp.com/login', {
+            const res = await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify({ email, password }),
