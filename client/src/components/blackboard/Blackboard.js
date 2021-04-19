@@ -7,7 +7,7 @@ import { UserContext } from '../../UserContext'
 let socket
 
 const Blackboard = () => {
-    const ENDPOINT = 'localhost:5000'
+    const ENDPOINT = 'https://blackboard-application.herokuapp.com'
     const borradorRef = useRef(null)
     const penRef = useRef(null)
     // const [ color, setColor ] = useState('#000000')
