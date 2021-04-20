@@ -101,5 +101,4 @@ io.on('connection', socket =>{
     })
 })
 
-
-server.listen(app.get('port'), () => console.log(`server listening on port ${app.get('port')}`))
+server.listen(process.env.PORT || 5000, () => console.log(`server listening on port ${app.get('port')}`))
