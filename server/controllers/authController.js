@@ -64,6 +64,7 @@ module.exports.verifyuser = (req, res, next) => {
             // console.log('decoded token', decodedToken)
             if(err){
                 console.log(err.message)
+                res.send(`error al leer el token: ${err.message}`)
             } else{
                 let user = await User.findById(decodedToken.id)
                 res.json(user)
@@ -71,6 +72,7 @@ module.exports.verifyuser = (req, res, next) => {
             }
         })
     } else {
+        res.send('No existe el token')
         next()
     }
 }

@@ -23,6 +23,7 @@ function App() {
 				setUser(data)
 			} catch(error){
 				console.log(error)
+				console.log('type del error', typeof error)
 			}
 		
 		}
