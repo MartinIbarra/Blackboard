@@ -15,10 +15,9 @@ function App() {
 	useEffect(() => {
 		const verifyUser = async () => {
 			try{
-				const res = await fetch('/.netlify/getjson', {
+				const res = await fetch('https://blackboard-application.herokuapp.com/verifyuser', {
 					credentials: 'include',
 					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({url: 'https://blackboard-application.herokuapp.com/verifyuser'})
 				})
 				const data = await res.json()
 				setUser(data)
