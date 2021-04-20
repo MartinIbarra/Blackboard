@@ -3,7 +3,6 @@ import React from 'react'
 const ColorPalette = ({getColor, user}) => {
 
     const changeColorEvent = (color) => {
-        // console.log('change color', color)
         getColor(color)
         user.emit('change-color', color)
     }

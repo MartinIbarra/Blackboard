@@ -85,7 +85,6 @@ const Blackboard = () => {
         }, false)
 
         function dibujar(event){
-            console.log('color antes de pintar ',color)
             ctx.beginPath()
             ctx.lineCap = 'round'
             ctx.strokeStyle = !color ? '#000000' : color

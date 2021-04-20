@@ -37,10 +37,6 @@ app.get('/', (req, res) =>{
     res.send('Blackboard app')
 })
 
-app.get('/test', (req, res) =>{
-    res.send('Blackboard test')
-})
-
 app.get('/set-cookie', (req, res) => {
     res.cookie('isAuthenticated', true, {httpOnly:true, maxAge: 24*60*60*1000})
     res.send('cookies are set')
@@ -91,10 +87,7 @@ io.on('connection', socket =>{
         io.to(data.room_id).emit('dibujando-socket', data)
     })
 
-    socket.on('change-color', data => {
-        io.to(data.room_id).emit('change-color', data)
-        console.log('change color to', data)
-    })
+    socket.on('change-color', data => io.to(data.room_id).emit('change-color', data))
 
     socket.on('borrando', data => {
         io.to(data.room_id).emit('borrando', data)
