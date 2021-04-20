@@ -7,7 +7,7 @@ import RoomList from './RoomList'
 let socket
 
 const Home = () => {
-    const ENDPOINT = 'https://blackboard-application.herokuapp.com'
+    const ENDPOINT = 'https://blackboard-application.herokuapp.com/'
     const { user, setUser } = useContext(UserContext)
     const [ room, setRoom ] = useState('')
     const [ rooms, setRooms ] = useState([])

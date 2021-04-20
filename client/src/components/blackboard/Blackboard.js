@@ -7,7 +7,7 @@ import { UserContext } from '../../UserContext'
 let socket
 
 const Blackboard = () => {
-    const ENDPOINT = 'https://blackboard-application.herokuapp.com'
+    const ENDPOINT = 'https://blackboard-application.herokuapp.com/'
     const borradorRef = useRef(null)
     const penRef = useRef(null)
     // const [ color, setColor ] = useState('#000000')
@@ -130,13 +130,12 @@ const Blackboard = () => {
 
         socket.on('change-color', data => {
             color = data
-            console.log('change color event listener',color)
         })
     }, [])
     return (
         <div className="container-fluid">
             <div className="row jumbotron">
-                <ColorPalette className="col-6" getColor={getColor} user={socket}/>
+                <ColorPalette getColor={getColor} user={socket}/>
                 <div className="col-6">
                     <span id="borrador" ref={borradorRef}>
                         <i className="bi bi-eraser"></i>
