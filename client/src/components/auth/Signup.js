@@ -45,25 +45,21 @@ const Signup = () => {
     }
     return (
         <div className="container-fluid">
-            <div className="row">
-                <h2>Signup</h2>
-                <form className="col col-12" onSubmit={submitHandler}>
+            <div className="row justify-content-center form-container">
+                <form className="col-4" onSubmit={submitHandler} autoComplete="off">
                     <div className="mb-3">
-                        <input id="name" type="text" className="validate form-control" value={name} onChange={e => setName(e.target.value)} />
-                        <div className="name error red-text">{nameError}</div>
-                        <label htmlFor="name">Name</label>
+                        <input id="name" type="text" placeholder="Name" spellCheck="false" className="input-form" value={name} onChange={e => setName(e.target.value)} />
+                        <div className="error">{nameError}</div>
                     </div>
                     <div className="mb-3">
-                        <input id="email" type="email" className="validate form-control" value={email} onChange={e => setEmail(e.target.value)} />
-                        <div className="name error red-text">{emailError}</div>
-                        <label htmlFor="email">Email</label>
+                        <input id="email" type="email" placeholder="Email" spellCheck="false" className="input-form" value={email} onChange={e => setEmail(e.target.value)} />
+                        <div className="error">{emailError}</div>
                     </div>
                     <div className="mb-3">
-                        <input id="password" type="password" className="validate form-control" value={password} onChange={e => setPassword(e.target.value)} />
-                        <div className="name error red-text">{passwordError}</div>
-                        <label htmlFor="password">Password</label>
+                        <input id="password" type="password" placeholder="Password" className="input-form" value={password} onChange={e => setPassword(e.target.value)} />
+                        <div className="error">{passwordError}</div>
                     </div>
-                    <button className="btn btn-primary"> Sign up </button>
+                    <button className="btn"> Sign up </button>
                 </form>
             </div>
         </div>

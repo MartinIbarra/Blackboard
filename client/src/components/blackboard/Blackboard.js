@@ -145,7 +145,7 @@ const Blackboard = () => {
                         <i className="bi bi-pencil"></i>
                     </span>
                 </div>
-                <canvas className="col-12" id="canvas" ref={canvasRef}>
+                <canvas id="canvas" ref={canvasRef}>
                     Tu navegador no es compatible
                 </canvas>
             </div>

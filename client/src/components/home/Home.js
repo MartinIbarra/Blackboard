@@ -54,11 +54,12 @@ const Home = () => {
                 <div className="row justify-content-between mx-auto w-100">
                     <div className="col-12 form-container mx-auto">
                         <div className="row content-rooms">
+
                             <div className="col-8">
-                                <p className="saludo-usuario text-center">{`Hola, ${user.name}`}</p>
-                                <form className="form-container form-room" onSubmit={createRoom}>
-                                    <input className="room-input" onChange={ e => { setRoom(e.target.value) }} onFocus={() => setRoomError('')} required type="text" placeholder="Create Room" value={room} />
-                                    <button className="create-btn btn btn-secondary"  type="submit">Create a room</button>
+                                <p className="saludo-usuario text-center">{`Hello, ${user.name}`}</p>
+                                <form className="form-room" onSubmit={createRoom}>
+                                    <input className="room-input" spellCheck="false" onChange={ e => { setRoom(e.target.value) }} onFocus={() => setRoomError('')} required type="text" placeholder="Room name" value={room} />
+                                    <button className="create-btn btn btn-secondary"  type="submit">Create room</button>
                                     <span className="error-room">{roomError}</span>
                                 </form>
                             </div>

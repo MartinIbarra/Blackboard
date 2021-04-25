@@ -41,20 +41,17 @@ const Login = () => {
     }
     return (
         <div className="container-fluid">
-            <div className="row">
-                <h2>Login</h2>
-                <form className="col-12" onSubmit={submitHandler}>
+            <div className="row justify-content-center form-container">
+                <form className="col-4" onSubmit={submitHandler} autoComplete="off">
                     <div className="mb-3">
-                        <input id="email" type="email" className="validate form-control" value={email} onChange={e => setEmail(e.target.value)} />
-                        <div className="name error red-text">{emailError}</div>
-                        <label htmlFor="email">Email</label>
+                        <input id="email" type="email" placeholder="email" spellCheck="false" className="input-form" value={email} onChange={e => setEmail(e.target.value)} />
+                        <div className="error">{emailError}</div>
                     </div>
                     <div className="mb-3">
-                        <input id="password" type="password" className="validate form-control" value={password} onChange={e => setPassword(e.target.value)} />
-                        <div className="name error red-text">{passwordError}</div>
-                        <label htmlFor="password">Password</label>
+                        <input id="password" type="password" placeholder="password" className="input-form" value={password} onChange={e => setPassword(e.target.value)} />
+                        <div className="error">{passwordError}</div>
                     </div>
-                    <button className="btn btn-primary"> Login </button>
+                    <button className="btn"> Login </button>
                 </form>
             </div>
         </div>
