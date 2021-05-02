@@ -7,7 +7,7 @@ const Navbar = () => {
 
     const logout = async () => {
         try {
-            const res = await fetch('https://blackboard-application.herokuapp.com/logout', {
+            const res = await fetch('http://localhost:5000/logout', {
                 credentials: 'include',
             });
             const data = res.json();
