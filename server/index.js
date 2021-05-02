@@ -17,7 +17,7 @@ mongoose.connect(process.env.CONNECT_DB_URL, { useNewUrlParser: true, useUnified
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const corsOptions = {
-    origin: 'https://blackboard-app.netlify.app',
+    origin: 'http://localhost:3000',
     credentials: true,
     optionsSuccessStatus: 200
 }
