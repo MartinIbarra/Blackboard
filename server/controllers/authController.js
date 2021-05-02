@@ -66,7 +66,7 @@ module.exports.verifyuser = (req, res, next) => {
                 console.log(err.message)
             } else{
                 let user = await User.findById(decodedToken.id)
-                res.json(user)
+                res.send(JSON.stringify(user))
                 next()
             }
         })

@@ -7,14 +7,14 @@ const Navbar = () => {
 
     const logout = async () => {
         try {
-            const res = await fetch('http://localhost:5000/logout', {
+            const res = await fetch('https://blackboard-application.herokuapp.com/logout', {
                 credentials: 'include',
             });
             const data = res.json();
-            console.log('logout data', data);
+            console.log('logout data', data)
             setUser(null)
         } catch (error) {
-            console.log(error)
+            console.log(JSON.stringify(error))
         }
 
     }
@@ -29,13 +29,13 @@ const Navbar = () => {
                 <div className="d-flex" id="navbarScroll">
                     <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="/login"> Login  </a>
+                            <a className="nav-link active" aria-current="page" href="/login">Login</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link active" href="#" onClick={logout}>Logout</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" href="/signup"> Signup </a>
+                            <a className="nav-link active" href="/signup">Signup</a>
                         </li>
                     </ul>
                 </div>

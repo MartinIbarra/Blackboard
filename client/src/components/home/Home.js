@@ -7,7 +7,7 @@ import RoomList from './RoomList'
 let socket
 
 const Home = () => {
-    const ENDPOINT = 'http://localhost:5000'
+    const ENDPOINT = 'https://blackboard-application.herokuapp.com/'
     const { user, setUser } = useContext(UserContext)
     const [ room, setRoom ] = useState('')
     const [ rooms, setRooms ] = useState([])
@@ -66,7 +66,11 @@ const Home = () => {
 
                             <div className="col-4 room-list">
                                 <h6>Room List</h6>
-                                <RoomList rooms={rooms}/>
+                                {
+                                    rooms.length === 0 
+                                    ? 'No hay salas disponibles'
+                                    : <RoomList rooms={rooms}/>
+                                }
                             </div>
                         </div>
                     </div>
