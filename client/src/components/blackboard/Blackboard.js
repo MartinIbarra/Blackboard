@@ -129,7 +129,6 @@ const Blackboard = () => {
 
         socket.on('change-color', data => {
             color = data
-            console.log('change color event listener',color)
         })
     }, [])
     return (

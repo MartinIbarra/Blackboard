@@ -1,10 +1,13 @@
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 const maxAge = 5 * 24 * 60 * 60
 
 const createJWT = id => {
-    return jwt.sign({id}, 'room secret', {
+    return jwt.sign({id}, process.env.JWT_SECRET_KEY, {
         expiresIn: maxAge
     })
 }
@@ -60,10 +63,11 @@ module.exports.login = async (req, res) => {
 module.exports.verifyuser = (req, res, next) => {
     const token = req.cookies.jwt
     if(token){
-        jwt.verify(token, 'room secret', async(err, decodedToken) =>{
+        jwt.verify(token, process.env.JWT_SECRET_KEY, async(err, decodedToken) =>{
             // console.log('decoded token', decodedToken)
             if(err){
                 console.log(err.message)
+                res.send(`error al leer el token: ${err.message}`)
             } else{
                 let user = await User.findById(decodedToken.id)
                 res.send(JSON.stringify(user))
@@ -71,6 +75,7 @@ module.exports.verifyuser = (req, res, next) => {
             }
         })
     } else {
+        res.send('No existe el token')
         next()
     }
 }

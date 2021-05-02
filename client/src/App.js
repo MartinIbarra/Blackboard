@@ -17,12 +17,13 @@ function App() {
 			try{
 				const res = await fetch('https://blackboard-application.herokuapp.com/verifyuser', {
 					credentials: 'include',
-					headers: { 'Content-Type': 'application/json' }
+					headers: { 'Content-Type': 'application/json' },
 				})
 				const data = await res.json()
 				setUser(data)
 			} catch(error){
-				console.log(JSON.stringify(error))
+				console.log(error)
+				console.log('type del error', typeof error)
 			}
 		
 		}
