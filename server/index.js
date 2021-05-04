@@ -17,7 +17,7 @@ mongoose.connect(process.env.CONNECT_DB_URL, { useNewUrlParser: true, useUnified
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: process.env.API_URL,
     credentials: true,
     optionsSuccessStatus: 200
 }
