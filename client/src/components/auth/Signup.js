@@ -18,9 +18,13 @@ const Signup = () => {
         setNameError('')
         setEmailError('')
         setPasswordError('')
+        let url
+        process.env.NODE_ENV === 'production'
+            ? url = process.env.REACT_APP_API_URL_PROD
+            : url = process.env.REACT_APP_API_URL
 
         try{
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
+            const res = await fetch(`${url}/signup`, {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify({ name, email, password }),

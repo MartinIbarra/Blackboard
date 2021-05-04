@@ -7,7 +7,11 @@ import { UserContext } from '../../UserContext'
 let socket
 
 const Blackboard = () => {
-    const ENDPOINT = `${process.env.REACT_APP_API_URL}`
+    let url
+    process.env.NODE_ENV === 'production'
+        ? url = process.env.REACT_APP_API_URL_PROD
+        : url = process.env.REACT_APP_API_URL
+    const ENDPOINT = `${url}`
     const borradorRef = useRef(null)
     const penRef = useRef(null)
     // const [ color, setColor ] = useState('#000000')

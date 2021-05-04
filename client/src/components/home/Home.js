@@ -7,7 +7,11 @@ import RoomList from './RoomList'
 let socket
 
 const Home = () => {
-    const ENDPOINT = `${process.env.REACT_APP_API_URL}`
+    let url
+    process.env.NODE_ENV === 'production'
+        ? url = process.env.REACT_APP_API_URL_PROD
+        : url = process.env.REACT_APP_API_URL
+    const ENDPOINT = `${url}`
     const { user, setUser } = useContext(UserContext)
     const [ room, setRoom ] = useState('')
     const [ rooms, setRooms ] = useState([])

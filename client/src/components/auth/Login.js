@@ -15,9 +15,13 @@ const Login = () => {
         e.preventDefault()
         setEmailError('')
         setPasswordError('')
+        let url
+        process.env.NODE_ENV === 'production'
+            ? url = process.env.REACT_APP_API_URL_PROD
+            : url = process.env.REACT_APP_API_URL
 
         try{
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+            const res = await fetch(`${url}/login`, {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify({ email, password }),

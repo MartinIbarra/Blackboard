@@ -6,8 +6,12 @@ const Navbar = () => {
     const { user, setUser } = useContext(UserContext)
 
     const logout = async () => {
+        let url
+			process.env.NODE_ENV === 'production'
+				? url = process.env.REACT_APP_API_URL_PROD
+				: url = process.env.REACT_APP_API_URL
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/logout`, {
+            const res = await fetch(`${url}/logout`, {
                 credentials: 'include',
             });
             const data = res.json();

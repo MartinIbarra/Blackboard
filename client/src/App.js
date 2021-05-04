@@ -14,8 +14,12 @@ function App() {
 
 	useEffect(() => {
 		const verifyUser = async () => {
+			let url
+			process.env.NODE_ENV === 'production'
+				? url = process.env.REACT_APP_API_URL_PROD
+				: url = process.env.REACT_APP_API_URL
 			try{
-				const res = await fetch(`${process.env.REACT_APP_API_URL}/verifyuser`, {
+				const res = await fetch(`${url}/verifyuser`, {
 					credentials: 'include',
 					headers: { 'Content-Type': 'application/json' },
 				})
