@@ -17,7 +17,7 @@ const Login = () => {
         setPasswordError('')
 
         try{
-            const res = await fetch('http://localhost:5000/login', {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify({ email, password }),

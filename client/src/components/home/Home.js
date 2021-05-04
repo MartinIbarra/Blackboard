@@ -7,7 +7,7 @@ import RoomList from './RoomList'
 let socket
 
 const Home = () => {
-    const ENDPOINT = 'http://localhost:5000'
+    const ENDPOINT = `${process.env.REACT_APP_API_URL}`
     const { user, setUser } = useContext(UserContext)
     const [ room, setRoom ] = useState('')
     const [ rooms, setRooms ] = useState([])

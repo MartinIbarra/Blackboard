@@ -1,3 +1,5 @@
-/node_modules
-/build
-/netlify.toml
+node_modules
+build
+netlify.toml
+.env
+.env.production

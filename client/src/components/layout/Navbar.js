@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { UserContext } from '../../UserContext';
+import { UserContext } from '../../UserContext'
 
 const Navbar = () => {
 
@@ -7,7 +7,7 @@ const Navbar = () => {
 
     const logout = async () => {
         try {
-            const res = await fetch('http://localhost:5000/logout', {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/logout`, {
                 credentials: 'include',
             });
             const data = res.json();

@@ -7,7 +7,7 @@ import { UserContext } from '../../UserContext'
 let socket
 
 const Blackboard = () => {
-    const ENDPOINT = 'http://localhost:5000'
+    const ENDPOINT = `${process.env.REACT_APP_API_URL}`
     const borradorRef = useRef(null)
     const penRef = useRef(null)
     // const [ color, setColor ] = useState('#000000')
