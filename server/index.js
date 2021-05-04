@@ -14,10 +14,16 @@ mongoose.connect(process.env.CONNECT_DB_URL, { useNewUrlParser: true, useUnified
     console.log(err)
 })
 
+let api_endpoint
+
+process.env.NODE_ENV === 'production'
+? api_endpoint = process.env.API_URL_PROD
+: api_endpoint = process.env.API_URL_DEV
+
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const corsOptions = {
-    origin: process.env.API_URL,
+    origin: api_endpoint,
     credentials: true,
     optionsSuccessStatus: 200
 }
