@@ -16,6 +16,8 @@ const Home = () => {
     const [ room, setRoom ] = useState('')
     const [ rooms, setRooms ] = useState([])
     const [ roomError, setRoomError ] = useState('')
+    const [ isRoomCreated, setIsRoomCreatedState ] = useState(false)
+    const [ roomObject, setRoomObject ] = useState({_id:'', name:''})
 
     useEffect(() => {
         socket = io(ENDPOINT)
@@ -33,8 +35,10 @@ const Home = () => {
     useEffect(() => {
         socket.on('room-created', room => {
             setRooms([...rooms, room])
+            setRoomObject({_id:room._id, name: room.name})
+            setIsRoomCreatedState(true)
         })
-    }, [rooms])
+    }, [])
 
     useEffect(()=>{
         socket.on('error-room-exist', err => {
@@ -45,7 +49,11 @@ const Home = () => {
     const createRoom = e => {
         e.preventDefault()
         socket.emit('create-room', room)
-        setRoom('')
+        // setRoom('')
+    }
+
+    if(isRoomCreated){
+        return <Redirect to={`/room/${roomObject._id}/${roomObject.name}`} />
     }
 
     if(!user){

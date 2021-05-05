@@ -6,6 +6,7 @@ import Navbar from './components/layout/Navbar'
 import Signup from './components/auth/Signup'
 import Login from './components/auth/Login'
 import Blackboard from './components/blackboard/Blackboard'
+import errorPage from './components/errors/errorPage'
 import './styles/App.scss'
 
 function App() {
@@ -27,7 +28,6 @@ function App() {
 				setUser(data)
 			} catch(error){
 				console.log(error)
-				console.log('type del error', typeof error)
 			}
 		
 		}
@@ -43,8 +43,9 @@ function App() {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route path="/room/:room_id/:room_name" component={Blackboard} />
-						<Route path="/signup" component={Signup} />
-						<Route path="/login" component={Login} />
+						<Route exact path="/signup" component={Signup} />
+						<Route exact path="/login" component={Login} />
+						<Route path="*" component={errorPage} />
 					</Switch>
         		</UserContext.Provider>
       		</div>

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Redirect } from 'react-router-dom'
 import io from 'socket.io-client'
 import ColorPalette from './ColorPalette'
 import { UserContext } from '../../UserContext'
@@ -18,10 +18,17 @@ const Blackboard = () => {
     let color = '#000000'
     const canvasRef = useRef(null)
     const { user, setUser } = useContext(UserContext)
+    // @ts-ignore
     let { room_id, room_name } = useParams()
+    const [ closeRoom, setCloseRoom ] = useState(false)
     socket = io(ENDPOINT)
 
-    const getColor = (param) => {
+    const exitRoom = () =>{
+        socket.emit('leave-room', room_name)
+        setCloseRoom(true)
+    }
+
+    const getColor = param => {
         color = param
         console.log('color value ', color)
     }
@@ -48,7 +55,7 @@ const Blackboard = () => {
         }
         ctx.lineWidth = 1
 
-        function obtenerPosicion(e){
+        const obtenerPosicion = e =>{
             let rect = canv.getBoundingClientRect()
             coordenadas.x = (e.clientX - rect.left)
             coordenadas.y = (e.clientY - rect.top)
@@ -87,7 +94,7 @@ const Blackboard = () => {
             }
         }, false)
 
-        function dibujar(event){
+        const dibujar = event =>{
             ctx.beginPath()
             ctx.lineCap = 'round'
             ctx.strokeStyle = !color ? '#000000' : color
@@ -104,17 +111,17 @@ const Blackboard = () => {
             ctx.stroke()
         }
 
-        function borrar(e){
+        const borrar = e => {
             let pos = obtenerPosicion(e)
             socket.emit('borrando', {pos, room_id})
             ctx.clearRect(pos.x - 50, pos.y - 50, 100, 100)
         }
 
-        function borrandoSocket(data){
+        const borrandoSocket = data =>{
             ctx.clearRect(data.pos.x - 50, data.pos.y - 50, 100, 100)
         }
 
-        function dibujandoSocket(data){
+        const dibujandoSocket = data =>{
             ctx.beginPath()
             ctx.lineCap = 'round'
             ctx.strokeStyle = !data.color ? '#000000' : data.color
@@ -135,17 +142,25 @@ const Blackboard = () => {
             color = data
         })
     }, [])
+
+    if(closeRoom){
+        return <Redirect to='/'/>
+    }
+
     return (
         <div className="container-fluid">
             <div className="row jumbotron">
-                <ColorPalette getColor={getColor} user={socket}/>
-                <div className="col-6">
+                <div className="col-12 d-inline-flex align-items-center">
+                    <ColorPalette getColor={getColor} user={socket}/>
                     <span id="borrador" ref={borradorRef}>
                         <i className="bi bi-eraser"></i>
                     </span>
                     <span id="pen" ref={penRef}>
                         <i className="bi bi-pencil"></i>
                     </span>
+                    <button onClick={exitRoom} className="close-btn">
+                        X
+                    </button>
                 </div>
                 <canvas id="canvas" ref={canvasRef}>
                     Tu navegador no es compatible

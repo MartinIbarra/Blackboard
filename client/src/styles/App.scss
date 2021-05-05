@@ -110,3 +110,25 @@ span {
 	padding-left:0 !important;
 	margin: 0 !important;
 }
+
+.error-404-page{
+	color: white;
+	margin: auto;
+	width: 400px;
+	font-size:20px;
+	text-align: center;
+	margin-top:50px;
+	h1{
+		font-size: 60px;
+	}
+}
+
+.close-btn{
+	background-color: red !important;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #5a0000;
+	border-radius: 4px;
+	position: absolute;
+	right: 60px;
+}

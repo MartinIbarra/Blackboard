@@ -37,7 +37,7 @@ app.set('port', process.env.PORT || 5000)
 
 const Room = require('./models/Room')
 const { addUser, getUser, removeUser } = require('./helpers/userHelper')
-const { createRoom } = require('./helpers/roomHelper')
+const { createRoom, deleteRoom } = require('./helpers/roomHelper')
 
 app.get('/', (req, res) =>{
     res.send('Blackboard app')
@@ -67,9 +67,18 @@ io.on('connection', socket =>{
             } else {
                 room.save().then(result => {
                     io.emit('room-created', result)
+                    console.log('created room', name)
                 })
-                console.log('created room',name)
             }
+        })
+    })
+
+    socket.on('leave-room', room =>{
+        deleteRoom(room, (err, roomInfo) => {
+            if(err){
+                console.log(err)
+            }
+            console.log('room deleted', roomInfo)
         })
     })
 

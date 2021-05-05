@@ -50,6 +50,7 @@ module.exports.signup = async (req, res) => {
 module.exports.login = async (req, res) => {
     const { email, password } = req.body
     try{
+        // @ts-ignore
         const user = await User.login(email, password)
         const token = createJWT(user._id)
         res.cookie('jwt', token,{ httpOnly: true, maxAge: maxAge * 1000 })
